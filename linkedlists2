@@ -1,0 +1,53 @@
+//add a node to the tail of linked list;
+#include<bits/stdc++.h>
+using namespace std;
+struct node{
+    int data;
+    struct node* next;
+};
+void print_linkedlist(struct node* head){
+    struct node* current = head;
+    while(current!=nullptr){
+        cout<< (current->data)<<'\n';
+        current = current->next;
+    }
+
+}
+void free_linkedlist(struct node **head){
+    
+    while(*head!=nullptr){
+        struct node* temp = *head;
+        *head = (*head)->next;
+        free(temp);
+    }
+}
+void insert_node_at_tail(struct node** head,int data){
+    struct node* current = (struct node*) malloc(sizeof(struct node));
+    current->next = nullptr;
+    current->data = data;
+    if(*head==nullptr){
+        *head = current;
+    }
+    else{
+        struct node* temp;
+        temp = *head;
+        while((temp->next)!=nullptr){
+           temp = temp->next;
+        }
+        temp->next=current;
+    }
+}
+int main(){
+    int count;
+    cin>> count;
+    struct node* head =nullptr;
+    for(int i=0;i<count;i++){
+        int item;
+        cin >> item;
+        insert_node_at_tail(&(head),item);
+
+    }
+    print_linkedlist(head);
+    free_linkedlist(&(head));
+    return 0;
+}
