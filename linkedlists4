@@ -1,0 +1,78 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct node{
+    int data;
+    struct node* next;
+};
+void insert_node_at_tail(struct node** head,int data){
+    struct node* current = (struct node*) malloc(sizeof(struct node));
+    current->next = nullptr;
+    current->data = data;
+    struct node* temp = *head;
+    while(temp!=nullptr){
+        temp = temp->next;
+    }
+    temp = current;
+}
+void print_linkedlist(struct node* head){
+    struct node* current = head;
+    while(current!=nullptr){
+        cout<< (current->data)<<'\n';
+        current = current->next;
+    }
+
+}
+void free_linkedlist(struct node **head){
+    
+    while(*head!=nullptr){
+        struct node* temp = *head;
+        *head = (*head)->next;
+        free(temp);
+    }
+}
+void insert_node_at_position(struct node** head,int data,int position){
+    struct node* new_node = (struct node*) malloc(sizeof(struct node));
+    
+    struct node* temp = *head;
+    int count = position;
+    if(count == 0 ){
+        new_node->next = temp;
+        temp = new_node;
+    }
+    else{
+        while(count){
+            count--;
+            temp=temp->next;
+
+        }
+        new_node->next = temp-next;
+        temp = new_node;
+        
+    }
+    
+    
+}
+
+
+struct node* delete_node_at_position(struct node** head, int position ){
+    
+}
+int main(){
+    int count;
+    cin>> count;
+    struct node* head =nullptr;
+    for(int i=0;i<count;i++){
+        int item;
+        cin >> item;
+        insert_node_at_tail(&(head),item);
+
+    }
+    int data;
+    int position;
+    cin>> data;
+    cin>> position;
+    struct node* head=insert_node_at_position( &head, data, position);
+    print_linkedlist(head);
+    free_linkedlist(&(head));
+    return 0;
+}
