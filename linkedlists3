@@ -1,0 +1,87 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct node{
+    int data;
+    struct node* next;
+};
+void insert_node_at_tail(struct node** head,int data){
+    //struct node* current = (struct node*) malloc(sizeof(struct node));
+    //current->next = nullptr;
+    //current->data = data;
+    //struct node* temp = *head;
+    //while(temp!=nullptr){
+    //    temp = temp->next;
+    //}
+    //temp = current;(This is probably the error)
+    struct node* current = (struct node*) malloc(sizeof(struct node));
+    current->next = nullptr;
+    current->data = data;
+    if(*head==nullptr){
+        *head = current;
+    }
+    else{
+        struct node* temp;
+        temp = *head;
+        while((temp->next)!=nullptr){
+           temp = temp->next;
+        }
+        temp->next=current;
+    }
+}
+}
+void print_linkedlist(struct node* head){
+    struct node* current = head;
+    while(current!=nullptr){
+        cout<< (current->data)<<'\n';
+        current = current->next;
+    }
+
+}
+void free_linkedlist(struct node **head){
+    
+    while(*head!=nullptr){
+        struct node* temp = *head;
+        *head = (*head)->next;
+        free(temp);
+    }
+}
+void insert_node_at_position(struct node** head,int data,int position){
+    struct node* new_node = (struct node*) malloc(sizeof(struct node));
+    new_node->data = data;
+    struct node* temp = *head;
+    int count = position;
+    if(count == 0 ){
+        new_node->next = *head;
+        *head = new_node;
+    }
+    else{
+        while(count-1){
+            
+            temp=temp->next;
+            count--;
+        }
+        new_node->next = temp->next;
+        temp->next = new_node;
+        
+    }
+}
+
+int main(){
+    int count;
+    cin>> count;
+    struct node* head =nullptr;
+    for(int i=0;i<count;i++){
+        int item;
+        cin >> item;
+        insert_node_at_tail(&(head),item);
+
+    }
+    int data;
+    int position;
+    cin>> data;
+    cin>> position;
+    insert_node_at_position( &head, data, position);
+    print_linkedlist(head);
+    free_linkedlist(&(head));
+    return 0;
+}
